@@ -1,168 +1,318 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
+	<meta name="format-detection" content="telephone=no">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<!-- PAGE TITLE HERE -->
+	<title>Sentiment Vaccine Covid-19</title>
 
-    <title>Sentiment Vaccine Covid-19</title>
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+	<link href="../static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../static/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<!-- Datatable -->
+	<link href="../static/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!-- Style css -->
+	<link href="../static/css/style.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top">
+<body>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-syringe"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sentiment Vaccine</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('index')}}">
-                    <i class="fas fa-map"></i>
-                    <span>Sentiment Vaccine Maps</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('klasifikasi')}}">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Classification</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('data')}}">
-                    <i class="fab fa-twitter-square"></i>
-                    <span>Data Tweets</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-                {% block content %}
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4 mt-5">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Tweets</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Create At</th>
-                                            <th>User id</th>
-                                            <th>Username</th>
-                                            <th>Name</th>
-                                            <th>Tweet</th>
-                                            <th>Geo</th>
-                                            <th>Label</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Create At</th>
-                                            <th>User id</th>
-                                            <th>Username</th>
-                                            <th>Name</th>
-                                            <th>Tweet</th>
-                                            <th>Geo</th>
-                                            <th>Label</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        {% for key,value in data.iterrows() %}
-                                        <tr>
-                                            <td>{{ value['id'] }}</td>
-                                            <td>{{ value['create_at'] }}</td>
-                                            <td>{{ value['user_id'] }}</td>
-                                            <td>{{ value['username'] }}</td>
-                                            <td>{{ value['name'] }}</td>
-                                            <td>{{ value['tweet'] }}</td>
-                                            <td>{{ value['geo'] }}</td>
-                                            <td>{{ value['label'] }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-                {% endblock %}
-            </div>
-            <!-- End of Main Content -->
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+			<a href="{{ url_for('index')}}" class="brand-logo">
+				<i class="fas fa-syringe"></i>
+				<div class="brand-title">
+					<h2 class="">ASVC-19 </h2>
+				</div>
+			</a>
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
 
 
 
-        </div>
-        <!-- End of Content Wrapper -->
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header border-bottom">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left">
+							<div class="dashboard_bar">
+								Data Tweet
+							</div>
+						</div>
+						<ul class="navbar-nav header-right">
+							<li class="nav-item dropdown notification_dropdown">
+								<h4 class=>Azy Mushofy Anwary</h4>
+							</li>
+							<li class="nav-item dropdown  header-profile
+								<a class=" nav-link" href="../static/javascript:void(0);" role="button" data-bs-toggle="dropdown">
+								<img src="../static/images/pic4.jpg" width="56" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
 
-    </div>
-    <!-- End of Page Wrapper -->
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="dlabnav">
+			<div class="dlabnav-scroll">
+				<ul class="metismenu" id="menu">
+					<li class="mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded=" false">
+							<i class="fas fa-map"></i>
+							<span class="nav-text">Maps</span>
+						</a>
+					</li>
+					<li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded=" false">
+							<i class="fas fa-sitemap"></i>
+							<span class="nav-text">Classification</span>
+						</a>
+					</li>
+					<li class="mm-active"><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
+							<i class="fab fa-twitter-square"></i>
+							<span class="nav-text">Data Tweet</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<div class="container-fluid">
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="{{ url_for('index')}}>Dashboard</a></li>
+						<li class=" breadcrumb-item"><a href="#">Data</a></li>
+					</ol>
+				</div>
+				<!-- row -->
+				<div class="row">
+					<div class="col-12">
+						{% block content %}
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Data Tweet</h4>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="example4" class="display mb-5" style="min-width: 845px">
+										<thead>
+											<tr>
+												<th>Id Tweet</th>
+												<th>Username</th>
+												<th>Geo Location</th>
+												<th>Label</th>
+												<th>Tweet</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr>
+												<td>1442865834938940000</td>
+												<td>@iratiara</td>
+												<td>-7.07422035411501,106.7054569721624</td>
+												<td><span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+														Negative
+													</span></td>
+												<td><button type="button" class="btn btn-rounded btn-primary"
+														data-bs-toggle="modal" data-bs-target="#tweet"><span
+															class="btn-icon-start text-primary"><i
+																class="fab fa-twitter"></i>
+														</span>Show</button></td>
+											</tr>
+											{% for key,value in data.iterrows() %}
+											<tr>
+												<td>{{ value['id'] }}</td>
+												<td>@{{ value['username'] }}</td>
+												<td>{{ value['geo'] }}</td>
+												<td>
+													{% if value['label'] == 0 %}
+													<span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+														Negative
+													</span>
+													{% elif value['label'] == 1 %}
+													<span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+														Positive
+													</span>
+													{% else %}
+													<span class="badge light badge-warning">
+														<i class="fa fa-circle text-warning me-1"></i>
+														Neutral
+													</span>
+													{% endif %}
+												</td>
+												<td><button type="button" data-bs-toggle="modal"
+														data-bs-target="#tweet{{value['id']}}"
+														class="btn btn-rounded btn-primary">Show</button></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+
+									{% for key,value in data.iterrows() %}
+									<div class="modal fade" id="tweet{{value['id']}}">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Detail Tweet</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal">
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="chat-bx d-flex ">
+														<div class="chat-img">
+															<img src="../static/images/foto.jpg" alt="">
+															</div>
+															<div class=" w-100">
+															<div class="d-flex mb-1 align-items-center">
+																<span class="fs-16 text-black">{{value['name']}}</span>
+																{% if value['label'] == 0 %}
+																<span
+																	class="fs-12 ms-auto accordion-flush badge light badge-danger">
+																	<i class="fa fa-circle text-danger me-1"></i>
+																	Negative
+																</span>
+																{% elif value['label'] == 1 %}
+																<span
+																	class="fs-12 ms-auto accordion-flush badge light badge-success">
+																	<i class="fa fa-circle text-success me-1"></i>
+																	Positive
+																</span>
+																{% else %}
+																<span
+																	class="fs-12 ms-auto accordion-flush badge light badge-warning">
+																	<i class="fa fa-circle text-warning me-1"></i>
+																	Neutral
+																</span>
+																{% endif %}
+															</div>
+															<span class="fs-14">@{{ value['username'] }}ssss</span>
+															<div>
+																<p class="mb-0 mt-3">{{value['tweet']}}</p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-danger light"
+														data-bs-dismiss="modal">Close</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../static/vendor/jquery/jquery.min.js"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../static/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../static/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	</div>
 
-    <!-- Page level custom scripts -->
-    <script src="../static/js/demo/datatables-demo.js"></script>
+	<!-- Required vendors -->
+	<script src="../static/vendor/global/global.min.js"></script>
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="../static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+	<!-- Apex Chart -->
+	<script src="../static/vendor/apexchart/apexchart.js"></script>
+
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+
+	<!-- Chart piety plugin files -->
+	<script src="../static/vendor/peity/jquery.peity.min.js"></script>
+	<!-- Dashboard 1 -->
+	<script src="../static/js/dashboard/dashboard-1.js"></script>
+
+	<!-- Datatable -->
+	<script src="../static/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/js/plugins-init/datatables.init.js"></script>
+
+	<script src="../static/js/custom.min.js"></script>
+	<script src="../static/js/dlabnav-init.js"></script>
+	<script src="../static/js/demo.js"></script>
+	<!-- <script src="../static/js/styleSwitcher.js"></script> -->
+	<script>
+		jQuery(window).on('load', function () {
+			setTimeout(function () {
+				cardsCenter();
+			}, 1000);
+		});
+		jQuery(document).ready(function () {
+			setTimeout(function () {
+				dlabSettingsOptions.version = 'dark';
+				new dlabSettings(dlabSettingsOptions);
+			}, 100)
+		});
+	</script>
 
 </body>
 

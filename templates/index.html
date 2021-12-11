@@ -1,142 +1,192 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Sentiment Vaccine Covid-19</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="../static/css/sb-admin-2.min.css" rel="stylesheet">
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
-    <link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <style>
-        #map {
-            position: relative;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+	<title>Sentiment Vaccine Covid-19</title>
+	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+	<link href="../static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="../static/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/vendor/nouislider/nouislider.min.css">
+	
+	<!-- Style css -->
+    <link href="../static/css/style.css" rel="stylesheet">
+	
 </head>
+<body>
 
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-syringe"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sentiment Vaccine</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('index')}}">
-                    <i class="fas fa-map"></i>
-                    <span>Sentiment Vaccine Maps</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('klasifikasi')}}">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Classification</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('data')}}">
-                    <i class="fab fa-twitter-square"></i>
-                    <span>Data Tweets</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-                <!-- <div id="content"> -->
-                <div id='map'></div>
-                <script>
-                    mapboxgl.accessToken =
-                        'pk.eyJ1IjoiYXJ0aHVycnIiLCJhIjoiY2s3aXNna2F0MG9tYzNybzkwMjI3aDBxZSJ9.T0Ovsp5LBJVymtTJIMRVzg';
-                </script>
-                <script>
-                    var map = new mapboxgl.Map({
-                        container: 'map',
-                        style: 'mapbox://styles/mapbox/streets-v11',
-                        center: [110.165690, -7.286055],
-                        zoom: 6.3
-                    });
-
-                    map.on('load', function () {
-                        map.addSource('rumah-pasien', {
-                            'type': 'geojson',
-                            'data': {
-                                'type': 'FeatureCollection',
-                                'features': [{
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [110.165690, -7.286055]
-                                    }
-                                }, ]
-                            }
-                        });
-                    });
-                </script>
-                <!-- </div> -->
-
-                <!-- /.container-fluid -->
-            </div>
-            <!-- End of Main Content -->
-        </div>
-        <!-- End of Content Wrapper -->
-
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
     </div>
-    <!-- End of Page Wrapper -->
-    <!-- Bootstrap core JavaScript-->
-    <script src="../static/vendor/jquery/jquery.min.js"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!--*******************
+        Preloader end
+    ********************-->
 
-    <!-- Core plugin JavaScript-->
-    <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
 
-    <!-- Custom scripts for all pages-->
-    <script src="../static/js/sb-admin-2.min.js"></script>
-    <!-- Page level plugins -->
-    <script src="../static/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+            <a href="{{ url_for('index')}}" class="brand-logo">
+				<i class="fas fa-syringe"></i>
+				<div class="brand-title">
+					<h2 class="">STVC-19 </h2>
+				</div>
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
 
-    <!-- Page level custom scripts -->
-    <script src="../static/js/demo/datatables-demo.js"></script>
+		
+		<!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header border-bottom">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+							<div class="dashboard_bar">
+                                Dashboard
+                            </div>
+                        </div>
+                        <ul class="navbar-nav header-right">
+							<li class="nav-item dropdown notification_dropdown">
+								<h4 class=>Azy Mushofy Anwary</h4> 
+							</li>
+							<li class="nav-item dropdown  header-profile">
+								
+								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+									<img src="../static/images/pic4.jpg" width="56" alt="">
+								</a>
+							</li>
+                        </ul>
+                    </div>
+				</nav>
+			</div>
+		</div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
+				<ul class="metismenu" id="menu">
+                    <li class="mm-active mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded="false">
+						<i class="fas fa-map"></i>
+							<span class="nav-text">Maps</span>
+						</a>
+					</li>
+					<li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded="false">
+						<i class="fas fa-sitemap"></i>
+							<span class="nav-text">Classification</span>
+						</a>
+					</li>
+					<li class=""><a href="{{ url_for('data')}}" class=" aria-expanded="false">
+						<i class="fab fa-twitter-square"></i>
+							<span class="nav-text">Data Tweet</span>
+						</a>
+					</li>
+                </ul>
+			</div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+		
+		<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="row">
+						
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+		
+
+
+		
+      
+	</div>
+ 
+    <!-- Required vendors -->
+    <script src="../static/vendor/global/global.min.js"></script>
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="../static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	
+	<!-- Apex Chart -->
+	<script src="../static/vendor/apexchart/apexchart.js"></script>
+	
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+	
+	<!-- Chart piety plugin files -->
+    <script src="../static/vendor/peity/jquery.peity.min.js"></script>
+	<!-- Dashboard 1 -->
+	<script src="../static/js/dashboard/dashboard-1.js"></script>
+	
+	<script src="../static/vendor/owl-carousel/owl.carousel.js"></script>
+	
+    <script src="../static/js/custom.min.js"></script>
+	<script src="../static/js/dlabnav-init.js"></script>
+	<script src="../static/js/demo.js"></script>
+    <!-- <script src="../static/js/styleSwitcher.js"></script> -->
+	<script>
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				cardsCenter();
+			}, 1000); 
+		});
+		jQuery(document).ready(function(){
+			setTimeout(function(){
+				dlabSettingsOptions.version = 'dark';
+				new dlabSettings(dlabSettingsOptions);
+			},100)
+		});
+		
+	</script>
+
 </body>
-
 </html>
