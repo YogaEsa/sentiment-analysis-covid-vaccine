@@ -87,8 +87,8 @@
 								<h4 class=>Azy Mushofy Anwary</h4>
 							</li>
 							<li class="nav-item dropdown  header-profile
-								<a class="nav-link" href="../static/javascript:void(0);" role="button" data-bs-toggle="dropdown">
-									<img src="../static/images/pic4.jpg" width="56" alt="">
+								<a class=" nav-link" href="../static/javascript:void(0);" role="button" data-bs-toggle="dropdown">
+								<img src="../static/images/pic4.jpg" width="56" alt="">
 								</a>
 							</li>
 						</ul>
@@ -116,7 +116,7 @@
 							<span class="nav-text">Klasifikasi</span>
 						</a>
 					</li>
-					<li class="mm-active"><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
+					<li class=""><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
 							<i class="fab fa-twitter-square"></i>
 							<span class="nav-text">Data Tweet</span>
 						</a>
@@ -145,16 +145,22 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title">Klasifikasi Data Baru</h4>
+								<h4 class="card-title">Input Data Tweet Baru</h4>
 							</div>
 							<div class="card-body">
-								<div class="input-group mb-3">
-									
-									<div class="form-file">
-										<input type="file" class="form-file-input form-control">
+								{% block content %}
+								<form action="{{ url_for('predict')}}" method="POST" enctype="multipart/form-data">
+									<!-- <textarea class="form-control" rows="15" style="min-height: 125px;" name="tweet"></textarea>
+									<button type="submit" class="btn btn-primary mt-4 btn-block mx-auto"
+										style="max-width: 800px;"><b>Klasifikasi</b></button> -->
+									<div class="input-group mb-3">
+										<div class="form-file">
+											<input type="file" name="file" class="form-file-input form-control">
+										</div>
+										<button class="btn btn-primary btn-sm" type="submit">Klasifikasi</button>
 									</div>
-									<button class="btn btn-primary btn-sm" type="button">Klasifikasi</button>
-								</div>
+								</form>
+								{% endblock %}
 							</div>
 						</div>
 					</div>
