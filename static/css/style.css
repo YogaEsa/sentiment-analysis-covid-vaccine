@@ -96,6 +96,10 @@
   --tryal-gradient: linear-gradient(212.43deg, #886CC0 19.43%, #AA6CC0 87.63%);
 }
 
+.padding-0{
+  padding:0 !important;
+}
+
 .gradient_one {
   background-image: linear-gradient(to right, rgba(186, 1, 181, 0.85) 0%, rgba(103, 25, 255, 0.85) 100%);
 }
