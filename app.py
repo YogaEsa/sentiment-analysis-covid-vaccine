@@ -115,10 +115,11 @@ def predict():
             dt['stop_removal'] = dt['tokenizing'].apply(lambda x: remove_stopwords(x))
             dt.to_csv(r'data/temp.csv', index = False)
 
-            dt = pd.read_csv('data/temp.csv')
-            predictLabel = loaded_model.predict(dt['stop_removal'])
+            data = pd.read_csv('data/temp.csv')
+            predictLabel = loaded_model.predict(data['stop_removal'])
             print(predictLabel)
-            return 'berhasil'
-    return render_template('klasifikasi.html')
+            data['label'] = predictLabel             
+            return render_template('predict.html',data=data)
+    return render_template('predict.html')
 if __name__ == '__main__':
     app.run(debug=True)

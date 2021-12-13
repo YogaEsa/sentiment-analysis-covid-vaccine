@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<meta name="robots" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+	<meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
+	<meta name="format-detection" content="telephone=no">
+
+	<!-- PAGE TITLE HERE -->
+	<title>Sentiment Vaccine Covid-19</title>
+
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+	<link href="../static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+
+	<!-- Datatable -->
+	<link href="../static/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<!-- Style css -->
+	<link href="../static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+			<a href="{{ url_for('index')}}" class="brand-logo">
+				<i class="fas fa-syringe"></i>
+				<div class="brand-title">
+					<h2 class="">ASVC-19 </h2>
+				</div>
+			</a>
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header border-bottom">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left">
+							<div class="dashboard_bar">
+								Klasifikasi
+							</div>
+						</div>
+						<ul class="navbar-nav header-right">
+							<li class="nav-item dropdown notification_dropdown">
+								<h4 class=>Azy Mushofy Anwary</h4>
+							</li>
+							<li class="nav-item dropdown  header-profile
+								<a class=" nav-link" href="../static/javascript:void(0);" role="button" data-bs-toggle="dropdown">
+								<img src="../static/images/pic4.jpg" width="56" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="dlabnav">
+			<div class="dlabnav-scroll">
+				<ul class="metismenu" id="menu">
+					<li class="mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded=" false">
+							<i class="fas fa-map"></i>
+							<span class="nav-text">Maps</span>
+						</a>
+					</li>
+					<li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded=" false">
+							<i class="fas fa-sitemap"></i>
+							<span class="nav-text">Klasifikasi</span>
+						</a>
+					</li>
+					<li class=""><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
+							<i class="fab fa-twitter-square"></i>
+							<span class="nav-text">Data Tweet</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<div class="container-fluid">
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="{{ url_for('index')}}">Dashboard</a></li>
+						<li class="breadcrumb-item active"><a href="{{ url_for('klasifikasi')}}">Klasifikasi</a></li>
+						<li class="breadcrumb-item"><a href="#">Hasil</a></li>
+					</ol>
+				</div>
+				<!-- row -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Hasil Klasifikasi</h4>
+							</div>
+							<div class="card-body">
+								{% block content %}
+								{% for key,value in data.iterrows() %}
+								<span class="text-primary d-block fs-18 font-w800 mb-1">#ID {{ value['id'] }}</span>
+								<table class="table table-bordered table-responsive-md mb-5">
+									<tbody>
+										<tr>
+											<th class="table-primary" style="width:35px;">Tweet</th>
+											<td>{{value['tweet']}}</td>
+										</tr>
+										<tr>
+											<th class="table-primary" style="width:35px;">Cleaning Text</th>
+											<td>{{value['clean_tweet']}}</td>
+										</tr>
+										<tr>
+											<th class="table-primary" style="width:35px;">Tokenizing</th>
+											<td>{{value['tokenizing']}}</td>
+										</tr>
+										<tr>
+											<th class="table-primary" style="width:35px;">Stop Word</th>
+											<td>{{value['stop_removal']}}</td>
+										</tr>
+										<tr>
+											<th class="table-primary" style="width:35px;">Predict Class</th>
+											<td>
+												{% if value['label'] == 0 %}
+													<span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+														Negative
+													</span>
+												{% elif value['label'] == 1 %}
+													<span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+														Positive
+													</span>
+												{% else %}
+													<span class="badge light badge-warning">
+														<i class="fa fa-circle text-warning me-1"></i>
+														Neutral
+													</span>
+												{% endif %}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								{% endfor %}
+								{% endblock %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
+
+
+
+
+
+	</div>
+
+	<!-- Required vendors -->
+	<script src="../static/vendor/global/global.min.js"></script>
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="../static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+	<!-- Apex Chart -->
+	<script src="../static/vendor/apexchart/apexchart.js"></script>
+
+	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+
+	<!-- Chart piety plugin files -->
+	<script src="../static/vendor/peity/jquery.peity.min.js"></script>
+	<!-- Dashboard 1 -->
+	<script src="../static/js/dashboard/dashboard-1.js"></script>
+
+	<!-- Datatable -->
+	<script src="../static/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/js/plugins-init/datatables.init.js"></script>
+
+	<script src="../static/js/custom.min.js"></script>
+	<script src="../static/js/dlabnav-init.js"></script>
+	<script src="../static/js/demo.js"></script>
+	<!-- <script src="../static/js/styleSwitcher.js"></script> -->
+	<script>
+		jQuery(window).on('load', function () {
+			setTimeout(function () {
+				cardsCenter();
+			}, 1000);
+		});
+		jQuery(document).ready(function () {
+			setTimeout(function () {
+				dlabSettingsOptions.version = 'dark';
+				new dlabSettings(dlabSettingsOptions);
+			}, 100)
+		});
+	</script>
+
+</body>
+
+</html>
