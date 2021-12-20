@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- PAGE TITLE HERE -->
+    <title>Analysis Sentiment Vaccine Covid-19</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+
+
+
+
+    <!-- Style css -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link href="../static/leaflet/leaflet.css" rel="stylesheet">
+    <script src="../static/leaflet/leaflet.js"></script>
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="{{ url_for('index')}}" class="brand-logo">
+                <i class="fas fa-syringe"></i>
+                <div class="brand-title">
+                    <h2 class="">ASVC-19 </h2>
+                </div>
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header border-bottom">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">
+                                Dashboard
+                            </div>
+                        </div>
+                        <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown notification_dropdown">
+                                <h4 class=>Azy Mushofy Anwary</h4>
+                            </li>
+                            <li class="nav-item dropdown  header-profile">
+
+                                <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+                                    <img src="../static/images/pic4.jpg" width="56" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="mm-active mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded=" false">
+                            <i class="fas fa-map"></i>
+                            <span class="nav-text">Maps</span>
+                        </a>
+                    </li>
+                    <li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded=" false">
+                            <i class="fas fa-sitemap"></i>
+                            <span class="nav-text">Classification</span>
+                        </a>
+                    </li>
+                    <li class=""><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
+                            <i class="fab fa-twitter-square"></i>
+                            <span class="nav-text">Data Tweet</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="row">
+
+                            <div id='map' style="height: 630px;" class="dark">
+                                <script src="../static/js/leaflet.ajax.js"></script>
+                                <!-- <script src="../data/data_tweets.js"></script> -->
+                                <script type="text/javascript">
+                                    let = latLng = [-7.286055, 110.165690];
+                                    const map = new L.map('map', {
+                                        zoom: 7.4,
+                                        center: new L.latLng(latLng)
+                                    });
+
+                                    map.addLayer(new L.tileLayer(
+                                        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                                            maxZoom: 11,
+                                            id: 'mapbox/streets-v11',
+                                            tileSize: 512,
+                                            zoomOffset: -1,
+                                            accessToken: 'pk.eyJ1IjoiYXJ0aHVycnIiLCJhIjoiY2s3aXNna2F0MG9tYzNybzkwMjI3aDBxZSJ9.T0Ovsp5LBJVymtTJIMRVzg'
+                                        }).addTo(map));
+
+                                
+                                    // Icon Setting
+                                    var PositiveIcon = L.icon({
+                                        iconUrl: '../static/icons/positive.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+                                    });
+                                    var NegativeIcon = L.icon({
+                                        iconUrl: '../static/icons/negative.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+                                    });
+                                    var NeutralIcon = L.icon({
+                                        iconUrl: '../static/icons/neutral.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+                                    });
+                                
+
+                                    var neutral = L.marker([-6.886913752193802, 107.54825318017755], {
+                                        icon: NeutralIcon
+                                    }).addTo(map);
+                                    
+
+                                    neutral.bindPopup(`
+                                        <div class="card p-0">
+                                            <div class="card-header border-0 p-0">
+                                                <h5 class="card-title">Card Neutral</h5>
+                                            </div>
+                                            <div class="card-body text-white p-0">
+                                                <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content</p>
+                                                <a href="javascript:void(0);" class="btn btn-primary">Go somewhere</a>
+                                            </div>
+                                            <div class="card-footer">
+                                                <p class="card-text text-dark">Last updateed 3 min ago</p>
+                                            </div>
+                                        </div>`);
+                                    neutral.on('click', onClick);
+
+
+                                     // Marker Positive
+                                     var positive = L.marker([-7.00136001324938, 108.56108562062255], {
+                                        icon: PositiveIcon
+                                    }).addTo(map);
+
+                                    positive.bindPopup(`
+                                        <div class="card p-0">
+                                            <div class="card-header border-0 p-0">
+                                                <h5 class="card-title">Card Positive</h5>
+                                            </div>
+                                            <div class="card-body text-white p-0">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id Tweet</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                                
+                                                {% for i,index in data.iterrows() %}
+											<tr>
+												<td>{{ i['id'] }}</td>
+											</tr>
+											{% endfor %}
+                                                <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content</p>
+                                                <a href="javascript:void(0);" class="btn btn-primary">Go somewhere</a>
+                                            </div>
+                                            <div class="card-footer">
+                                                <p class="card-text text-dark">Last updateed 3 min ago</p>
+                                            </div>
+                                        </div>`);
+                                    positive.on('click', onClick);
+                                    
+
+                                      // Marker Negative
+                                    var negative = L.marker([-7.126198141692416, 107.15610947734498], {
+                                        icon: NegativeIcon
+                                    }).addTo(map);
+
+                                    negative.bindPopup(`                           
+                                        <div class="card p-0">
+                                            <div class="card-header border-0 p-0">
+                                                <h5 class="card-title">Card Negative</h5>
+                                            </div>
+                                            <div class="card-body text-white p-0" id="employ_data">
+                                            <div class="card-body text-white p-0">
+                                                <p class="card-text" >ID Tweet</p>
+                                                <a href="javascript:void(0);" class="btn btn-primary" id="load_data">Go somewhere</a>
+                                            </div>
+                                            
+                                            <div class="card-footer">
+                                                <p class="card-text text-dark">Last updateed 3 min ago</p>
+                                            </div>
+                                        </div>`);
+                                    negative.on('click', onClick);
+
+                                   
+                                    function onClick(e) {
+                                        var popup = e.target.getPopup();
+                                        var content = popup.getContent();
+                                    }
+                                </script>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        {% block content %}
+        
+        {% endblock %}
+
+
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Required vendors -->
+    <script src="../static/vendor/global/global.min.js"></script>
+    <script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="../static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="../static/vendor/apexchart/apexchart.js"></script>
+
+    <script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
+
+    <!-- Chart piety plugin files -->
+    <script src="../static/vendor/peity/jquery.peity.min.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="../static/js/dashboard/dashboard-1.js"></script>
+
+    <script src="../static/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/dlabnav-init.js"></script>
+    <script src="../static/js/demo.js"></script>
+    <!-- <script src="../static/js/styleSwitcher.js"></script> -->
+    <script>
+        jQuery(window).on('load', function () {
+            setTimeout(function () {
+                cardsCenter();
+            }, 1000);
+        });
+        jQuery(document).ready(function () {
+            setTimeout(function () {
+                dlabSettingsOptions.version = 'dark';
+                new dlabSettings(dlabSettingsOptions);
+            }, 100)
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#load_data').click(function(){
+                $.ajax({
+                    url:"../data/data_tweets.csv",
+                    dataType:"text",
+                    success:function(data){
+                        var employ_data = data.split(/\r?\n|\r/); 
+                        var tabel_data = '<table class="table table-bordered">';
+                        for(var count=0; count < employ_data.length; count++){
+                            var cell_data = employ_data[count].split(",");
+                            tabel_data = '<tr>';
+                                for(var cell_count=0; cell_count<cell_data.length; cell_count++){
+                                    if(count === 0){
+                                        tabel_data += '<th>'+cell_data[cell_count]+'</th>'
+                                    }
+                                    else{
+                                        tabel_data += '<td>'+cell_data[cell_count]+'</td>'
+                                    }
+                                }
+                                tabel_data += '</tr>';
+                        }tabel_data += '</tr>'
+                        $('#employ_data').html(tabel_data);
+                    }
+                    });
+                });
+        });
+    </script>
+
+</body>
+
+</html>
