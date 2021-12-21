@@ -14,6 +14,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from sklearn import model_selection
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -47,11 +48,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 stop_factory = StopWordRemoverFactory() 
 stopword = stop_factory.get_stop_words()
+factory = StemmerFactory()
+stemmer = factory.create_stemmer()
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def stemming(tweet):
+    return stemmer.stem(tweet)
 
 def remove_punct(tweet):
   tweet = re.sub(r'https?://[A-Za-z0-9./]+', '', tweet)
@@ -88,10 +93,9 @@ def index():
 def klasifikasi():
     return render_template('klasifikasi.html')
     
-
 @app.route('/data')
 def data():
-    data = pd.read_csv("data/data_tweets.csv", delimiter=';')
+    data = pd.read_csv("data/data_tweets.csv")
     return render_template('data.html',data=data)
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -113,14 +117,28 @@ def predict():
 
             dt['clean_tweet'] = dt['tweet'].apply(lambda x: remove_punct(x))
             dt['clean_tweet'] = to_lowercase(dt['clean_tweet'])
-            dt['tokenizing'] = dt['clean_tweet'].apply(lambda x: tokenization(x))
+            dt['stemming'] = dt['clean_tweet'].apply(lambda x: remove_punct(x))
+            dt['tokenizing'] = dt['stemming'].apply(lambda x: tokenization(x))
             dt['stop_removal'] = dt['tokenizing'].apply(lambda x: remove_stopwords(x))
-            dt.to_csv(r'data/temp.csv', index = False)
 
+            # Save Load Data Praproses
+            dt.to_csv(r'data/temp.csv', index = False)
             data = pd.read_csv('data/temp.csv')
             predictLabel = loaded_model.predict(data['stop_removal'])
-            print(predictLabel)
-            data['label'] = predictLabel             
+            data['label'] = predictLabel
+            
+            # Save hasil klasifikasi
+            data.to_csv(r'data/temp.csv', index = False,columns=['id','created_at','user_id','username','name','tweet','geo','clean_tweet','stemming','tokenizing','stop_removal','label'])             
+            
+            # Penggabungan Data Test dengan Data Utama (Corpus)
+            df1 = pd.read_csv('data/data_tweets.csv')
+            df2 = pd.read_csv('data/temp.csv')
+
+            frames = [df1, df2]
+            result = pd.concat(frames)
+
+            result.to_csv(r'data/data_tweets.csv', index = False)
+
             return render_template('predict.html',data=data)
     return render_template('predict.html')
 if __name__ == '__main__':
