@@ -1,5 +1,6 @@
 # In[ ]:
 
+from typing import List
 from flask import Flask, render_template, url_for, request, flash
 
 # ML PACKAGES LIB
@@ -77,15 +78,16 @@ def remove_stopwords(tweet):
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
-
+    data = pd.read_csv("data/data_tweets.csv", delimiter=';')
+    data.values.tolist()
+    return render_template('index.html', data=data)
 
 @app.route('/klasifikasi')
 def klasifikasi():
     return render_template('klasifikasi.html')
-
+    
 
 @app.route('/data')
 def data():
