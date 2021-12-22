@@ -145,10 +145,10 @@
 
                             <div id='map' style="height: 630px;" class="dark">
                                 <script src="../static/js/leaflet.ajax.js"></script>
-                                <!-- <script src="../data/data_tweets.js"></script> -->
+                                <script src="../data/data_tweets.json"></script>
                                 <script type="text/javascript">
                                     let = latLng = [-7.286055, 110.165690];
-                                    const map = new L.map('map', {
+                                    var map = new L.map('map', {
                                         zoom: 7.4,
                                         center: new L.latLng(latLng)
                                     });
@@ -162,6 +162,12 @@
                                             zoomOffset: -1,
                                             accessToken: 'pk.eyJ1IjoiYXJ0aHVycnIiLCJhIjoiY2s3aXNna2F0MG9tYzNybzkwMjI3aDBxZSJ9.T0Ovsp5LBJVymtTJIMRVzg'
                                         }).addTo(map));
+
+                                        L.geoJSON(data,{
+                                            pointToLayer: function(geoJsonPoint, latLng){
+                                                return L.marker(latLng)
+                                            }
+                                        }).addTo(map);
 
                                 
                                     // Icon Setting
