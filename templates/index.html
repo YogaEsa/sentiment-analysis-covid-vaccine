@@ -204,9 +204,9 @@
 
                                             for (const [index, geoloc] of uniqgeo.entries()) {
                                                 var groupMarker = [];
-                                                var latlong = geoloc.split(",");
+                                                var latLng = geoloc.split(",");
 
-                                                groupMarker[index] = L.marker([latlong[0], latlong[1]], {
+                                                groupMarker[index] = L.marker([latLng[0], latLng[1]], {
                                                     icon: PositiveIcon
                                                 }).addTo(map);
 
@@ -215,7 +215,22 @@
                                                     <div class="card-header border-0 p-0">
                                                         <h5 class="card-title">Card Neutral</h5>
                                                     </div>
-                                                    <div class="card-body text-white p-0">
+                                                    <div class="card-body text-white p-0">                                        
+                                                    <tr>
+                                                        <!-- jQuery(document).ready(function () {
+                                                            jQuery.getJSON('jsondata', function (data) {
+                                                                let id = id_user))]; -->
+                                                    </tr>    
+                                                    <div>
+                                                        
+                                                        <tr>
+                                                            <td>{{ value['id_user'] }}</td>                                                            
+                                                            <td><button type="button" data-bs-toggle="modal"
+                                                                    data-bs-target="#tweet{{value['id']}}"
+                                                                    class="btn btn-rounded btn-primary">Show</button></td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </div>
                                                         <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content</p>
                                                         <a href="javascript:void(0);" class="btn btn-primary">Go somewhere</a>
                                                     </div>
