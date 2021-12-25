@@ -12,7 +12,12 @@ Analysis Sentiment Vaccine Covid-19 - Dasboard
 <!-- Css Section -->
 {% block style %}
 <style>
-    
+    #bg {
+        opacity: 0.9;
+        width: 1070px ;
+        height: 560px;
+        border-radius: 10px;
+    }
 </style>
 {% endblock %}
 
@@ -22,15 +27,17 @@ Dasboard
 {% endblock %}
 
 <!-- Breadcrumb Section -->
-{% block breadcrumb %}
+<!-- {% block breadcrumb %}
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 </ol>
-{% endblock %}
+{% endblock %} -->
 
 <!-- Main Section -->
 {% block content %}
-<h1> Halaman Dashboard </h1>
+    <div class="row page">
+        <img id="bg" src="{{ url_for('static', filename='images/Dashboard.jpg') }}"  alt="">
+    </div>    
 {% endblock %}
 
 <!-- Javascript Section -->
