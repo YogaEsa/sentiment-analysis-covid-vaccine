@@ -81,15 +81,20 @@ def remove_stopwords(tweet):
     tweet = [word for word in tweet if word not in stopword]
     return tweet
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('index.html', data=jsondata)
-
 @app.route('/jsondata', methods=['GET'])
 def jsondata():
     df = pd.read_csv('data/data_tweets.csv')
     jsondata = df.to_json(orient="records")
     return Response(jsondata, mimetype='application/json')
+
+@app.route('/', methods=['GET'])
+def index():
+     return render_template('index.html')
+
+@app.route('/maps', methods=['GET'])
+def maps():
+     return render_template('maps.html')
+
 
 @app.route('/klasifikasi')
 def klasifikasi():
@@ -145,5 +150,7 @@ def predict():
     return render_template('predict.html')
 if __name__ == '__main__':
     app.run(debug=True)
+
+# %%
 
 # %%
