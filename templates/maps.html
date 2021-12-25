@@ -66,6 +66,7 @@ Maps
 
         jQuery(document).ready(function () {
             jQuery.getJSON('jsondata', function (data) {
+              
                 let uniqgeo = [...new Set(data.map(({
                     geo
                 }) => geo))];
@@ -75,7 +76,7 @@ Maps
                 for (const [index, geoloc] of uniqgeo.entries()) {
                     var groupMarker = [];
                     var latlong = geoloc.split(",");
-
+                    console.log(uniqgeo);
                     groupMarker[index] = L.marker([latlong[0], latlong[
                         1]], {
                         icon: CustomIcon

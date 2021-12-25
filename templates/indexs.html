@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+    <meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- PAGE TITLE HERE -->
+    <title>Analysis Sentiment Vaccine Covid-19</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+
+    <!-- Style css -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link href="../static/leaflet/leaflet.css" rel="stylesheet">
+    <script src="../static/leaflet/leaflet.js"></script>
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="{{ url_for('index')}}" class="brand-logo">
+                <i class="fas fa-syringe"></i>
+                <div class="brand-title">
+                    <h2 class="">ASVC-19 </h2>
+                </div>
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header border-bottom">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="dashboard_bar">
+                                Dashboard
+                            </div>
+                        </div>
+                        <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown notification_dropdown">
+                                <h4 class=>Azy Mushofy Anwary</h4>
+                            </li>
+                            <li class="nav-item dropdown  header-profile">
+
+                                <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+                                    <img src="../static/images/pic4.jpg" width="56" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="mm-active mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded=" false">
+                            <i class="fas fa-map"></i>
+                            <span class="nav-text">Maps</span>
+                        </a>
+                    </li>
+                    <li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded=" false">
+                            <i class="fas fa-sitemap"></i>
+                            <span class="nav-text">Classification</span>
+                        </a>
+                    </li>
+                    <li class=""><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
+                            <i class="fab fa-twitter-square"></i>
+                            <span class="nav-text">Data Tweet</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div>
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div id='map' style="height: 630px;" class="dark">
+                                <script src="../static/js/leaflet.ajax.js"></script>
+                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                <!-- <script src="../data/data_tweets.js"></script> -->
+                                <script type="text/javascript">
+                                    let = latLng = [-7.286055, 110.165690];
+                                    const map = new L.map('map', {
+                                        zoom: 7.4,
+                                        center: new L.latLng(latLng)
+                                    });
+
+                                    map.addLayer(new L.tileLayer(
+                                        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                                            maxZoom: 11,
+                                            id: 'mapbox/streets-v11',
+                                            tileSize: 512,
+                                            zoomOffset: -1,
+                                            accessToken: 'pk.eyJ1IjoiYXJ0aHVycnIiLCJhIjoiY2s3aXNna2F0MG9tYzNybzkwMjI3aDBxZSJ9.T0Ovsp5LBJVymtTJIMRVzg'
+                                        }).addTo(map));
+
+
+                                    // Icon Setting
+                                    var PositiveIcon = L.icon({
+                                        iconUrl: '../static/icons/positive.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,
+                                            41
+                                        ], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -
+                                            40
+                                        ] // point from which the popup should open relative to the iconAnchor
+                                    });
+                                    var NegativeIcon = L.icon({
+                                        iconUrl: '../static/icons/negative.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,
+                                            41
+                                        ], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -
+                                            40
+                                        ] // point from which the popup should open relative to the iconAnchor
+                                    });
+                                    var NeutralIcon = L.icon({
+                                        iconUrl: '../static/icons/neutral.png',
+                                        iconSize: [30, 41], // size of the icon
+                                        iconAnchor: [12,
+                                            41
+                                        ], // point of the icon which will correspond to marker's location
+                                        popupAnchor: [2, -
+                                            40
+                                        ] // point from which the popup should open relative to the iconAnchor
+                                    });
+
+                                    jQuery(document).ready(function () {
+                                        jQuery.getJSON('jsondata', function (data) {
+                                           
+                                            let uniqgeo = [...new Set(data.map(({
+                                                geo
+                                            }) => geo))];
+                                            var cpositive = 0;
+                                                var cnegative =0;
+                                                var cneutral = 0;
+                                            for (const [index, geoloc] of uniqgeo.entries()) {
+                                                var groupMarker = [];
+                                                var latlong = geoloc.split(",");
+                                                
+                                                groupMarker[index] = L.marker([latlong[0], latlong[
+                                                    1]], {
+                                                    icon: PositiveIcon
+                                                }).addTo(map);
+
+                                                groupMarker[index].bindPopup(`
+                                                <div class="card p-0">
+                                                    <div class="card-header border-0 p-0">
+                                                        <span class="badge badge-xs light badge-warning">${geoloc}</span>
+                                                    </div>
+                                                    <div class="card-body text-white p-0">
+                                                        <canvas id="myChart${index}" class="mt-4" width="150" height="150"></canvas>
+                                                    </div>
+                                                </div>`);
+                                                groupMarker[index].on('click', onClick);
+
+                                                function onClick(e) {
+                                                    cpositive = 0;
+                                                cnegative = 0;
+                                                cneutral = 0;
+                                                for (const [idx, kelas] of data.entries()) {
+                                                    if (kelas.geo == geoloc) {
+                                                        if (kelas.label == 1) {
+                                                            cpositive++;
+                                                        } else if (kelas.label == 0) {
+                                                            cnegative++;
+                                                        } else {
+                                                            cneutral++;
+                                                        }
+                                                    }
+                                                }
+                                                    console.log(cpositive[index])
+                                                    var popup = e.target.getPopup();
+                                                    var content = popup.getContent();
+                                                    var ctx = document.getElementById("myChart"+index);
+                                                    var myChart = new Chart(ctx, {
+                                                        type: 'doughnut',
+                                                        data: {
+                                                            labels: ["Negative", "Neutral",
+                                                                "Positive"
+                                                            ],
+                                                            datasets: [{
+                                                                label: '# of Votes',
+                                                                data: [cnegative, cneutral, cpositive],
+                                                                backgroundColor: [
+                                                                    'rgba(255, 99, 132, 0.2)',
+                                                                    'rgba(54, 162, 235, 0.2)',
+                                                                    'rgba(75, 192, 192, 0.2)',
+                                                                ],
+                                                                borderColor: [
+                                                                    'rgba(255,99,132,1)',
+                                                                    'rgba(54, 162, 235, 1)',
+                                                                    'rgba(75, 192, 192, 1)',
+                                                                ],
+                                                                borderWidth: 1
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            responsive: true,
+                                                            plugins: {
+                                                                legend: {
+                                                                    title: {
+                                                                        display: true,
+                                                                    },
+                                                                    position: 'bottom',
+                                                                    labels: {
+                                                                        color: "white",
+                                                                    }
+                                                                }
+                                                            },
+                                                            animation: {
+                                                                animateScale: true,
+                                                                animateRotate: true
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+    </div>
+
+
+    <!-- Required vendors -->
+    <!-- Required vendors -->
+    <script src="../static/vendor/global/global.min.js"></script>
+
+    <!-- Chart piety plugin files -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Dashboard 1 -->
+    <script src="../static/js/dashboard/dashboard-1.js"></script>
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/dlabnav-init.js"></script>
+    <script src="../static/js/demo.js"></script>
+    <script>
+        jQuery(window).on('load', function () {
+            setTimeout(function () {
+                cardsCenter();
+            }, 1000);
+        });
+        jQuery(document).ready(function () {
+            setTimeout(function () {
+                dlabSettingsOptions.version = 'dark';
+                new dlabSettings(dlabSettingsOptions);
+            }, 100)
+        });
+    </script>
+</body>
+
+</html>
