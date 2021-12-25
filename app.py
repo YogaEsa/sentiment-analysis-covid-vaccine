@@ -83,7 +83,7 @@ def remove_stopwords(tweet):
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', data=jsondata)
 
 @app.route('/jsondata', methods=['GET'])
 def jsondata():

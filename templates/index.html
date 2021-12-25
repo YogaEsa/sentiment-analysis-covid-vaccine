@@ -216,20 +216,21 @@
                                                         <h5 class="card-title">Card Neutral</h5>
                                                     </div>
                                                     <div class="card-body text-white p-0">                                        
-                                                    <tr>
-                                                        <!-- jQuery(document).ready(function () {
-                                                            jQuery.getJSON('jsondata', function (data) {
-                                                                let id = id_user))]; -->
-                                                    </tr>    
-                                                    <div>
-                                                        
+                                                    <table id="data_table">
                                                         <tr>
-                                                            <td>{{ value['id_user'] }}</td>                                                            
-                                                            <td><button type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#tweet{{value['id']}}"
-                                                                    class="btn btn-rounded btn-primary">Show</button></td>
+                                                            <td>id user</td>
+                                                        </tr>   
+                                                    </table>
+                                                    <div>                                                        
+                                                        <tr>
+                                                            {% for dict_item in parent_list %}
+                                                            {% for key,value in dict_item.iterrows() %}
+                                                            <tr>
+											                    <td>{{ value['user_id'] }}</td>                                              
+                                                            </tr>
+                                                            {% endfor %} 
+                                                            {% endfor %} 
                                                         </tr>
-                                                        {% endfor %}
                                                     </div>
                                                         <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content</p>
                                                         <a href="javascript:void(0);" class="btn btn-primary">Go somewhere</a>
