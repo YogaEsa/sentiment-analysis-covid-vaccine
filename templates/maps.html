@@ -1,0 +1,161 @@
+<!-- Extend template Layout -->
+{% extends "layout/main_template.html" %}
+
+<!-- Set Active Menu -->
+{% set active_page = "maps" %}
+
+<!-- Title Page Section -->
+{% block title %}
+Analysis Sentiment Vaccine Covid-19 - Maps
+{% endblock %}
+
+<!-- Css Section -->
+{% block style %}
+<style>
+    #map {
+        z-index: 0;
+    }
+</style>
+{% endblock %}
+
+<!-- Barname Section -->
+{% block barname %}
+Maps
+{% endblock %}
+
+<!-- Breadcrumb Section -->
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active"><a href="{{ url_for('index')}}">Dashboard</a></li>
+    <li class=" breadcrumb-item"><a href="#">Maps</a></li>
+</ol>
+{% endblock %}
+
+<!-- Main Section -->
+{% block content %}
+    <div id='map' style="height: 630px;" class="dark">
+{% endblock %}
+
+
+<!-- Javascript Section -->
+{% block js %}
+    <script>
+        let = latLng = [-7.286055, 110.165690];
+        const map = new L.map('map', {
+            zoom: 7.4,
+            center: new L.latLng(latLng)
+        });
+
+        map.addLayer(new L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 11,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoiYXJ0aHVycnIiLCJhIjoiY2s3aXNna2F0MG9tYzNybzkwMjI3aDBxZSJ9.T0Ovsp5LBJVymtTJIMRVzg'
+            }).addTo(map));
+
+        // Icon Setting
+        var CustomIcon = L.icon({
+            iconUrl: '{{ url_for('static', filename='icons/positive.png') }}',
+            iconSize: [30, 41], // size of the icon
+            iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+            popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+        });
+
+        jQuery(document).ready(function () {
+            jQuery.getJSON('jsondata', function (data) {
+                let uniqgeo = [...new Set(data.map(({
+                    geo
+                }) => geo))];
+                var cpositive = 0;
+                var cnegative = 0;
+                var cneutral = 0;
+                for (const [index, geoloc] of uniqgeo.entries()) {
+                    var groupMarker = [];
+                    var latlong = geoloc.split(",");
+
+                    groupMarker[index] = L.marker([latlong[0], latlong[
+                        1]], {
+                        icon: CustomIcon
+                    }).addTo(map);
+
+                    groupMarker[index].bindPopup(`
+                                                <div class="card p-0">
+                                                    <div class="card-header border-0 p-0">
+                                                        <span class="badge badge-xs light badge-warning">${geoloc}</span>
+                                                    </div>
+                                                    <div class="card-body text-white p-0">
+                                                        <canvas id="myChart${index}" class="mt-4" width="150" height="150"></canvas>
+                                                    </div>
+                                                </div>`);
+                    groupMarker[index].on('click', onClick);
+
+                    function onClick(e) {
+                        cpositive = 0;
+                        cnegative = 0;
+                        cneutral = 0;
+                        for (const [idx, kelas] of data.entries()) {
+                            if (kelas.geo == geoloc) {
+                                if (kelas.label == 1) {
+                                    cpositive++;
+                                } else if (kelas.label == 0) {
+                                    cnegative++;
+                                } else {
+                                    cneutral++;
+                                }
+                            }
+                        }
+                        console.log(cpositive[index])
+                        var popup = e.target.getPopup();
+                        var content = popup.getContent();
+                        var ctx = document.getElementById("myChart" + index);
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ["Negative", "Neutral",
+                                    "Positive"
+                                ],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: [cnegative, cneutral, cpositive],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(255,99,132,1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        title: {
+                                            display: true,
+                                        },
+                                        position: 'bottom',
+                                        labels: {
+                                            color: "white",
+                                        }
+                                    }
+                                },
+                                animation: {
+                                    animateScale: true,
+                                    animateRotate: true
+                                }
+                            }
+                        });
+                    }
+
+                }
+            });
+        });
+    </script>
+{% endblock %}

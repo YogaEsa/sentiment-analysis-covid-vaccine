@@ -1,219 +1,56 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!-- Extend template Layout -->
+{% extends "layout/main_template.html" %}
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-	<meta name="robots" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-	<meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-	<meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-	<meta property="og:image" content="https:/fillow.dexignlab.com/xhtml/social-image.png">
-	<meta name="format-detection" content="telephone=no">
+<!-- Set Active Menu -->
+{% set active_page = "klasifikasi" %}
 
-	<!-- PAGE TITLE HERE -->
-	<title>Analysis Sentiment Vaccine Covid-19</title>
+<!-- Title Page Section -->
+{% block title %}
+Analysis Sentiment Vaccine Covid-19 - Classification Tweet
+{% endblock %}
 
-	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
-	<link href="../static/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+<!-- Css Section -->
+{% block style %}
+<style>
 
-	<!-- Datatable -->
-	<link href="../static/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!-- Style css -->
-	<link href="../static/css/style.css" rel="stylesheet">
+</style>
+{% endblock %}
 
-</head>
+<!-- Barname Section -->
+{% block barname %}
+Classification
+{% endblock %}
 
-<body>
+<!-- Breadcrumb Section -->
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active"><a href="{{ url_for('index')}}">Dashboard</a></li>
+    <li class=" breadcrumb-item"><a href="#">Classification</a></li>
+</ol>
+{% endblock %}
 
-	<!--*******************
-        Preloader start
-    ********************-->
-	<div id="preloader">
-		<div class="lds-ripple">
-			<div></div>
-			<div></div>
-		</div>
-	</div>
-	<!--*******************
-        Preloader end
-    ********************-->
+<!-- Main Section -->
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Input Data Tweet Baru</h4>
+    </div>
+    <div class="card-body">
+        <form action="{{ url_for('predict')}}" method="POST" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <div class="form-file">
+                    <input type="file" name="file" class="form-file-input form-control">
+                </div>
+                <button class="btn btn-primary btn-sm" type="submit">Klasifikasi</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
 
-	<!--**********************************
-        Main wrapper start
-    ***********************************-->
-	<div id="main-wrapper">
+<!-- Javascript Section -->
+{% block js %}
+<script>
 
-		<!--**********************************
-            Nav header start
-        ***********************************-->
-		<div class="nav-header">
-			<a href="{{ url_for('index')}}" class="brand-logo">
-				<i class="fas fa-syringe"></i>
-				<div class="brand-title">
-					<h2 class="">ASVC-19 </h2>
-				</div>
-			</a>
-			<div class="nav-control">
-				<div class="hamburger">
-					<span class="line"></span><span class="line"></span><span class="line"></span>
-				</div>
-			</div>
-		</div>
-		<!--**********************************
-            Nav header end
-        ***********************************-->
-
-
-
-		<!--**********************************
-            Header start
-        ***********************************-->
-		<div class="header border-bottom">
-			<div class="header-content">
-				<nav class="navbar navbar-expand">
-					<div class="collapse navbar-collapse justify-content-between">
-						<div class="header-left">
-							<div class="dashboard_bar">
-								Klasifikasi
-							</div>
-						</div>
-						<ul class="navbar-nav header-right">
-							<li class="nav-item dropdown notification_dropdown">
-								<h4 class=>Azy Mushofy Anwary</h4>
-							</li>
-							<li class="nav-item dropdown  header-profile
-								<a class=" nav-link" href="../static/javascript:void(0);" role="button" data-bs-toggle="dropdown">
-								<img src="../static/images/pic4.jpg" width="56" alt="">
-								</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-		<!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-		<!--**********************************
-            Sidebar start
-        ***********************************-->
-		<div class="dlabnav">
-			<div class="dlabnav-scroll">
-				<ul class="metismenu" id="menu">
-					<li class="mb-3"><a href="{{ url_for('index')}}" class=" aria-expanded=" false">
-							<i class="fas fa-map"></i>
-							<span class="nav-text">Maps</span>
-						</a>
-					</li>
-					<li class="mb-3"><a href="{{ url_for('klasifikasi')}}" class=" aria-expanded=" false">
-							<i class="fas fa-sitemap"></i>
-							<span class="nav-text">Klasifikasi</span>
-						</a>
-					</li>
-					<li class=""><a href="{{ url_for('data')}}" class=" aria-expanded=" false">
-							<i class="fab fa-twitter-square"></i>
-							<span class="nav-text">Data Tweet</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!--**********************************
-            Sidebar end
-        ***********************************-->
-
-		<!--**********************************
-            Content body start
-        ***********************************-->
-		<div class="content-body">
-			<div class="container-fluid">
-
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="{{ url_for('index')}}">Dashboard</a></li>
-						<li class="breadcrumb-item"><a href="#">Klasifikasi</a></li>
-					</ol>
-				</div>
-				<!-- row -->
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Input Data Tweet Baru</h4>
-							</div>
-							<div class="card-body">
-								{% block content %}
-								<form action="{{ url_for('predict')}}" method="POST" enctype="multipart/form-data">
-									<!-- <textarea class="form-control" rows="15" style="min-height: 125px;" name="tweet"></textarea>
-									<button type="submit" class="btn btn-primary mt-4 btn-block mx-auto"
-										style="max-width: 800px;"><b>Klasifikasi</b></button> -->
-									<div class="input-group mb-3">
-										<div class="form-file">
-											<input type="file" name="file" class="form-file-input form-control">
-										</div>
-										<button class="btn btn-primary btn-sm" type="submit">Klasifikasi</button>
-									</div>
-								</form>
-								{% endblock %}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--**********************************
-            Content body end
-        ***********************************-->
-
-
-
-
-
-	</div>
-
-	<!-- Required vendors -->
-	<script src="../static/vendor/global/global.min.js"></script>
-	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
-	<script src="../static/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-
-	<!-- Apex Chart -->
-	<script src="../static/vendor/apexchart/apexchart.js"></script>
-
-	<script src="../static/vendor/chart.js/Chart.bundle.min.js"></script>
-
-	<!-- Chart piety plugin files -->
-	<script src="../static/vendor/peity/jquery.peity.min.js"></script>
-	<!-- Dashboard 1 -->
-	<script src="../static/js/dashboard/dashboard-1.js"></script>
-
-	<!-- Datatable -->
-	<script src="../static/vendor/datatables/js/jquery.dataTables.min.js"></script>
-	<script src="../static/js/plugins-init/datatables.init.js"></script>
-
-	<script src="../static/js/custom.min.js"></script>
-	<script src="../static/js/dlabnav-init.js"></script>
-	<script src="../static/js/demo.js"></script>
-	<!-- <script src="../static/js/styleSwitcher.js"></script> -->
-	<script>
-		jQuery(window).on('load', function () {
-			setTimeout(function () {
-				cardsCenter();
-			}, 1000);
-		});
-		jQuery(document).ready(function () {
-			setTimeout(function () {
-				dlabSettingsOptions.version = 'dark';
-				new dlabSettings(dlabSettingsOptions);
-			}, 100)
-		});
-	</script>
-
-</body>
-
-</html>
+</script>
+{% endblock %}
