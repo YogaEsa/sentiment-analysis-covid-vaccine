@@ -83,7 +83,7 @@ def remove_stopwords(tweet):
 
 @app.route('/jsondata', methods=['GET'])
 def jsondata():
-    df = pd.read_csv('data/data_tweets.csv')
+    df = pd.read_csv('data/new_data_tweets.csv')
     jsondata = df.to_json(orient="records")
     return Response(jsondata, mimetype='application/json')
 
@@ -102,7 +102,7 @@ def klasifikasi():
     
 @app.route('/data')
 def data():
-    data = pd.read_csv("data/data_tweets.csv")
+    data = pd.read_csv("data/new_data_tweets.csv")
     return render_template('data.html',data=data)
 
 @app.route('/predict', methods=['GET', 'POST'])

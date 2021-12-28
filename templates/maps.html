@@ -70,9 +70,15 @@ Maps
                 let uniqgeo = [...new Set(data.map(({
                     geo
                 }) => geo))];
+
+                let uniqtempat = [...new Set(data.map(({
+                    nama_tempat
+                }) => nama_tempat))];
+
                 var cpositive = 0;
                 var cnegative = 0;
                 var cneutral = 0;
+                console.log(uniqtempat);
                 for (const [index, geoloc] of uniqgeo.entries()) {
                     var groupMarker = [];
                     var latlong = geoloc.split(",");
@@ -81,12 +87,12 @@ Maps
                         1]], {
                         icon: CustomIcon
                     }).addTo(map);
-
                     groupMarker[index].bindPopup(`
                                                 <div class="card p-0">
-                                                    <div class="card-header border-0 p-0">
-                                                        <span class="badge badge-xs light badge-warning">${geoloc}</span>
+                                                    <div class="card-header p-0 mx-auto">
+                                                        <h4 class="text-white">${uniqtempat[index]} </h4>
                                                     </div>
+                                                    <span class="badge badge-xs light badge-warning">${geoloc}</span>
                                                     <div class="card-body text-white p-0">
                                                         <canvas id="myChart${index}" class="mt-4" width="150" height="150"></canvas>
                                                     </div>

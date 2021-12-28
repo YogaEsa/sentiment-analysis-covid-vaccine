@@ -42,7 +42,7 @@ Data Tweets
                     <tr>
                         <th>Id Tweet</th>
                         <th>Username</th>
-                        <th>Geo Location</th>
+                        <th>Location</th>
                         <th>Label</th>
                         <th>Tweet</th>
                     </tr>
@@ -52,7 +52,9 @@ Data Tweets
                     <tr>
                         <td>{{ value['id'] }}</td>
                         <td>@{{ value['username'] }}</td>
-                        <td>{{ value['geo'] }}</td>
+                        <td>
+                            {{ value['nama_tempat'] }} <br class="mb-2">
+                            <span class="badge badge-xs light badge-primary">{{ value['geo'] }}</span></td>
                         <td>
                             {% if value['label'] == 0 %}
                             <span class="badge light badge-danger">
