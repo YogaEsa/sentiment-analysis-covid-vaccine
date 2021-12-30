@@ -135,16 +135,16 @@ def predict():
             data['label'] = predictLabel
             
             # Save hasil klasifikasi
-            data.to_csv(r'data/temp.csv', index = False,columns=['id','created_at','user_id','username','name','tweet','geo','clean_tweet','stemming','tokenizing','stop_removal','label'])             
+            data.to_csv(r'data/temp.csv', index = False,columns=['id','created_at','user_id','username','name','tweet','geo','nama_tempat','label','clean_tweet','stemming','tokenizing','stop_removal'])             
             
             # Penggabungan Data Test dengan Data Utama (Corpus)
-            df1 = pd.read_csv('data/data_tweets.csv')
+            df1 = pd.read_csv('data/new_data_tweets.csv')
             df2 = pd.read_csv('data/temp.csv')
 
             frames = [df1, df2]
             result = pd.concat(frames)
 
-            result.to_csv(r'data/data_tweets.csv', index = False)
+            result.to_csv(r'data/new_data_tweets.csv', index = False)
 
             return render_template('predict.html',data=data)
     return render_template('predict.html')
