@@ -57,12 +57,29 @@ Maps
             }).addTo(map));
 
         // Icon Setting
-        var CustomIcon = L.icon({
+        var PositiveIcon = L.icon({
             iconUrl: '{{ url_for('static', filename='icons/positive.png') }}',
             iconSize: [30, 41], // size of the icon
             iconAnchor: [12,41], // point of the icon which will correspond to marker's location
             popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
         });
+
+        // Icon Setting
+        var NegativeIcon = L.icon({
+            iconUrl: '{{ url_for('static', filename='icons/negative.png') }}',
+            iconSize: [30, 41], // size of the icon
+            iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+            popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+        });
+
+        // Icon Setting
+        var NeutralIcon = L.icon({
+            iconUrl: '{{ url_for('static', filename='icons/neutral.png') }}',
+            iconSize: [30, 41], // size of the icon
+            iconAnchor: [12,41], // point of the icon which will correspond to marker's location
+            popupAnchor: [2, -40] // point from which the popup should open relative to the iconAnchor
+        });
+
 
         jQuery(document).ready(function () {
 
@@ -77,13 +94,41 @@ Maps
                 var cneutral = 0;
                 var groupMarker = [];
                 for (const [index, geoloc] of newarr.entries()) {
-                   
                     var latlong = geoloc.geo.split(",");
-                    // console.log(uniqgeo);
-                    groupMarker[index] = L.marker([latlong[0], latlong[
+                    cpositive = 0;
+                    cnegative = 0;
+                    cneutral = 0;
+                    for (const [idx, kelas] of data.entries()) {
+                            if (kelas.geo == geoloc.geo) {
+                                if (kelas.label == 1) {
+                                    cpositive++;
+                                } else if (kelas.label == 0) {
+                                    cnegative++;
+                                } else {
+                                    cneutral++;
+                                }
+                            }
+                        }
+                    
+                   
+                    if (cpositive > cneutral && cpositive > cnegative) {
+                        groupMarker[index] = L.marker([latlong[0], latlong[
                         1]], {
-                        icon: CustomIcon
-                    }).addTo(map);
+                        icon: PositiveIcon
+                    }).addTo(map);                        
+                    }else if (cnegative > cpositive && cnegative > cneutral) {
+                        groupMarker[index] = L.marker([latlong[0], latlong[
+                        1]], {
+                        icon: NegativeIcon
+                    }).addTo(map); 
+                    } else {
+                        groupMarker[index] = L.marker([latlong[0], latlong[
+                        1]], {
+                        icon: NeutralIcon
+                    }).addTo(map); 
+                    }
+                    // console.log(uniqgeo);
+
                     groupMarker[index].bindPopup(`
                                                 <div class="card p-0">
                                                     <div class="card-header p-0 mx-auto">
